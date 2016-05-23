@@ -1,8 +1,8 @@
-package hello.controller;
+package com.controller;
 
 
-import hello.model.Person;
-import hello.repositories.PersonRepository;
+import com.model.Person;
+import com.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,8 +28,9 @@ public class Controller {
     public Person doSomthing(@RequestParam(value="name", defaultValue="toot" ) String name)
     {
         Person person = repository.findByFirstName(name);
-        if(person != null) return person;
-        return null;
+
+        return person;
+
     }
 
 }
