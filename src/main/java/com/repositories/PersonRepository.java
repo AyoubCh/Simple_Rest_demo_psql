@@ -26,4 +26,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	Person findByFirstName(String name);
 
 	Person findById( long id);
+
 }

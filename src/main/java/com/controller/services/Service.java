@@ -39,6 +39,7 @@ public class Service {
     public Person update(Person person)
     {
         try {
+            if( ! repository.exists(person.getId())) return null;
             person = repository.save(person);
 
         }catch (ExecutionError e){

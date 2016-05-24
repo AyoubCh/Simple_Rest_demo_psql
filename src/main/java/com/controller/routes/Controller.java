@@ -4,6 +4,7 @@ package com.controller.routes;
 import com.controller.services.Service;
 import com.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -47,15 +48,17 @@ public class Controller  {
         //return new String("{ok}");
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public Person update(@RequestBody Person person)
+    @RequestMapping(path = "/{id}",method = RequestMethod.PUT)
+    public Person update(@PathVariable Long id,@RequestBody Person person)
     {
+        if( id!=person.getId() ) throw new resourceNotFoundException( "Wrong end point, try with /"+person.getId());
         person = service.update(person);
         if( person == null ) throw new resourceNotFoundException( "Can't update Person with id "+person.getId());
         return person;
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public Person create (@RequestBody Person person)
     {
         person = service.add(person);
